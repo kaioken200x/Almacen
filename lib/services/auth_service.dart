@@ -2,14 +2,14 @@ class AuthService {
   // Mock login function - Replace with actual API integration
   static Future<bool> login(String email, String password) async {
     // Simulate API call delay
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const º(seconds: 5));
 
     // Mock validation
     if (email == 'globomatik' && password == 'globomatik') {
       return true;
     }
     throw Exception('Invalid credentials');
-
+    
     /* 
     // TODO: Implement actual API integration
     try {
