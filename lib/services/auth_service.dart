@@ -1,20 +1,16 @@
-class AuthService {
-  // Mock login function - Replace with actual API integration
-  static Future<bool> login(String email, String password) async {
-    // Simulate API call delay
-    await Future.delayed(const º(seconds: 5));
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-    // Mock validation
-    if (email == 'globomatik' && password == 'globomatik') {
-      return true;
-    }
-    throw Exception('Invalid credentials');
-    
-    /* 
-    // TODO: Implement actual API integration
+class AuthService {
+  static const String baseUrl = 'https://your-laravel-api.com/api';
+  static String? _token;
+
+  static String? get token => _token;
+
+  static Future<bool> login(String email, String password) async {
     try {
-      final response = await http.post(
-        Uri.parse('${ApiService.baseUrl}/login'),
+      /*final response = await http.post(
+        Uri.parse('$baseUrl/auth/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'email': email,
@@ -23,15 +19,23 @@ class AuthService {
       );
 
       if (response.statusCode == 200) {
-        final token = json.decode(response.body)['token'];
-        // Store token securely (e.g., using flutter_secure_storage)
+        final data = json.decode(response.body);
+        _token = data['token'];
         return true;
       } else {
-        throw Exception('Invalid credentials');
-      }
+        throw Exception('Credenciales inválidas');
+      }*/
+      return true;
     } catch (e) {
-      throw Exception('Login failed: $e');
+      throw Exception('Error de inicio de sesión: $e');
     }
-    */
+  }
+
+  static Future<void> logout() async {
+    _token = null;
+  }
+
+  static bool isAuthenticated() {
+    return _token != null;
   }
 }

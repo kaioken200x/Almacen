@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/screens/warehouse/warehouse_zone_screen.dart';
 
 class WarehouseScreen extends StatelessWidget {
   const WarehouseScreen({super.key});
@@ -16,19 +17,34 @@ class WarehouseScreen extends StatelessWidget {
             title: 'Zona A',
             capacity: '80%',
             items: 150,
-            onTap: () {},
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const WarehouseZoneScreen(zoneName: 'A'),
+              ),
+            ),
           ),
           _WarehouseCard(
             title: 'Zona B',
             capacity: '45%',
             items: 89,
-            onTap: () {},
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const WarehouseZoneScreen(zoneName: 'B'),
+              ),
+            ),
           ),
           _WarehouseCard(
             title: 'Zona C',
             capacity: '95%',
             items: 200,
-            onTap: () {},
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const WarehouseZoneScreen(zoneName: 'C'),
+              ),
+            ),
           ),
         ],
       ),

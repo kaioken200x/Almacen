@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Image.asset(
                   'assets/images/globomatik.png',
-                  height: 120,
+                  height: 100,
                 ),
                 const SizedBox(height: 32),
                 TextFormField(

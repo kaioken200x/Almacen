@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:inventory_app/screens/product_search_screen.dart';
 import 'package:inventory_app/screens/reports_screen.dart';
 import 'package:inventory_app/screens/warehouse_screen.dart';
+import 'package:inventory_app/widgets/user_profile_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,7 +35,8 @@ class HomeScreen extends StatelessWidget {
       onWillPop: () => _onWillPop(context),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Almacén Globomatik'),
+          title: const Text('Sistema de Inventario'),
+          actions: const [UserProfileWidget()],
           automaticallyImplyLeading: false,
         ),
         body: GridView.count(
@@ -92,22 +94,15 @@ class _MenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      child: InkWell(
-        onTap: onTap,
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 48, color: Theme.of(context).primaryColor),
+            Icon(icon, size: 48),
             const SizedBox(height: 16),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            Text(title, style: const TextStyle(fontSize: 18)),
           ],
         ),
       ),
