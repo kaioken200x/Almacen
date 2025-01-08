@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/models/product.dart';
+import 'package:globomatik_app/models/product.dart';
+import 'package:globomatik_app/screens/product_edit_screen.dart';
 import 'package:intl/intl.dart';
 
 class ProductSearchItem extends StatelessWidget {
@@ -12,50 +13,58 @@ class ProductSearchItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    product.name,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ProductEditScreen(product: product),
+        ),
+      ),
+      child: Card(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      product.name,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                Text(
-                  '\$${product.price.toStringAsFixed(2)}',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue,
+                  Text(
+                    NumberFormat.currency(symbol: '\$').format(product.price),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(
-              product.description,
-              style: const TextStyle(color: Colors.grey),
-            ),
-            const SizedBox(height: 8),
-            _buildInfoRow('Lot Number:', product.lotNumber),
-            _buildInfoRow('Location:', product.warehouseLocation),
-            _buildInfoRow(
-              'Expiry Date:',
-              DateFormat('dd/MM/yyyy').format(product.expiryDate),
-            ),
-            _buildInfoRow('Quantity:', product.quantity.toString()),
-            _buildInfoRow('Invoice:', product.invoiceNumber),
-          ],
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                product.description,
+                style: const TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 8),
+              _buildInfoRow('Lot Número:', product.lotNumber),
+              _buildInfoRow('Ubicación:', product.warehouseLocation),
+              _buildInfoRow(
+                'Fecha de vencimiento:',
+                DateFormat('dd/MM/yyyy').format(product.expiryDate),
+              ),
+              _buildInfoRow('Cantidad:', product.quantity.toString()),
+              _buildInfoRow('Factura:', product.invoiceNumber),
+            ],
+          ),
         ),
       ),
     );

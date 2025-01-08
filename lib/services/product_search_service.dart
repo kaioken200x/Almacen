@@ -1,4 +1,4 @@
-import 'package:inventory_app/models/product.dart';
+import 'package:globomatik_app/models/product.dart';
 
 class ProductSearchService {
   // Mock product data
@@ -37,10 +37,10 @@ class ProductSearchService {
 
     // Mock search logic
     if (query.isEmpty) return _mockProducts;
-    
+
     return _mockProducts.where((product) {
       return product.name.toLowerCase().contains(query.toLowerCase()) ||
-             product.lotNumber.toLowerCase().contains(query.toLowerCase());
+          product.lotNumber.toLowerCase().contains(query.toLowerCase());
     }).toList();
 
     /* 

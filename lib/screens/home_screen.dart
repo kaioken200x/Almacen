@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:inventory_app/screens/product_search_screen.dart';
-import 'package:inventory_app/screens/reports_screen.dart';
-import 'package:inventory_app/screens/warehouse_screen.dart';
-import 'package:inventory_app/widgets/user_profile_widget.dart';
+import 'package:globomatik_app/screens/product_search_screen.dart';
+import 'package:globomatik_app/screens/reports_screen.dart';
+import 'package:globomatik_app/screens/warehouse_screen.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String _appVersion = '1.0.0';
+  String _loggedInUser = 'Usuario';
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchAppInfo();
+  }
+
+  Future<void> _fetchAppInfo() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      _appVersion = packageInfo.version;
+      _loggedInUser = 'Usuario Logado';
+    });
+  }
 
   Future<bool> _onWillPop(BuildContext context) async {
     final shouldPop = await showDialog<bool>(
@@ -35,15 +57,17 @@ class HomeScreen extends StatelessWidget {
       onWillPop: () => _onWillPop(context),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Sistema de Inventario'),
-          actions: const [UserProfileWidget()],
+          title: Container(
+            margin: const EdgeInsets.only(top: 8.0),
+            child: Image.asset(
+              'assets/images/globomatik.png',
+              height: 50,
+            ),
+          ),
           automaticallyImplyLeading: false,
         ),
-        body: GridView.count(
-          padding: const EdgeInsets.all(24),
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _MenuCard(
               icon: Icons.inventory,
@@ -53,6 +77,7 @@ class HomeScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (_) => const ProductSearchScreen()),
               ),
             ),
+            const SizedBox(height: 16),
             _MenuCard(
               icon: Icons.warehouse,
               title: 'Almacén',
@@ -61,6 +86,7 @@ class HomeScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (_) => const WarehouseScreen()),
               ),
             ),
+            const SizedBox(height: 16),
             _MenuCard(
               icon: Icons.assessment,
               title: 'Informes',
@@ -69,12 +95,45 @@ class HomeScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (_) => const ReportsScreen()),
               ),
             ),
+            const SizedBox(height: 16),
             _MenuCard(
               icon: Icons.logout,
               title: 'Cerrar Sesión',
               onTap: () => _onWillPop(context),
             ),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('Información'),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Usuario: $_loggedInUser'),
+                    Text('Versión: $_appVersion'),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text('Cerrar'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      _onWillPop(context);
+                    },
+                    child: const Text('Cerrar Sesión'),
+                  ),
+                ],
+              ),
+            );
+          },
+          child: const Icon(Icons.info),
         ),
       ),
     );
@@ -97,13 +156,16 @@ class _MenuCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 48),
-            const SizedBox(height: 16),
-            Text(title, style: const TextStyle(fontSize: 18)),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Icon(icon, size: 48),
+              const SizedBox(width: 16),
+              Text(title, style: const TextStyle(fontSize: 18)),
+            ],
+          ),
         ),
       ),
     );

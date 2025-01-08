@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/models/product.dart';
-import 'package:inventory_app/services/api_service.dart';
+import 'package:globomatik_app/models/product.dart';
+import 'package:globomatik_app/services/api_service.dart';
 
 class ProductFormScreen extends StatefulWidget {
   final Product? product;
@@ -14,7 +14,7 @@ class ProductFormScreen extends StatefulWidget {
 class _ProductFormScreenState extends State<ProductFormScreen> {
   final _formKey = GlobalKey<FormState>();
   final _apiService = ApiService();
-  
+
   late TextEditingController _nameController;
   late TextEditingController _descriptionController;
   late TextEditingController _priceController;
@@ -22,7 +22,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   late TextEditingController _invoiceNumberController;
   late TextEditingController _warehouseLocationController;
   late TextEditingController _quantityController;
-  
+
   DateTime _expiryDate = DateTime.now();
   DateTime _purchaseDate = DateTime.now();
 
@@ -30,13 +30,19 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   void initState() {
     super.initState();
     _nameController = TextEditingController(text: widget.product?.name);
-    _descriptionController = TextEditingController(text: widget.product?.description);
-    _priceController = TextEditingController(text: widget.product?.price.toString());
-    _lotNumberController = TextEditingController(text: widget.product?.lotNumber);
-    _invoiceNumberController = TextEditingController(text: widget.product?.invoiceNumber);
-    _warehouseLocationController = TextEditingController(text: widget.product?.warehouseLocation);
-    _quantityController = TextEditingController(text: widget.product?.quantity.toString());
-    
+    _descriptionController =
+        TextEditingController(text: widget.product?.description);
+    _priceController =
+        TextEditingController(text: widget.product?.price.toString());
+    _lotNumberController =
+        TextEditingController(text: widget.product?.lotNumber);
+    _invoiceNumberController =
+        TextEditingController(text: widget.product?.invoiceNumber);
+    _warehouseLocationController =
+        TextEditingController(text: widget.product?.warehouseLocation);
+    _quantityController =
+        TextEditingController(text: widget.product?.quantity.toString());
+
     if (widget.product != null) {
       _expiryDate = widget.product!.expiryDate;
       _purchaseDate = widget.product!.purchaseDate;
@@ -47,7 +53,8 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.product == null ? 'Add Product' : 'Edit Product'),
+        title: Text(
+            widget.product == null ? 'Agregar producto' : 'Editar producto'),
       ),
       body: Form(
         key: _formKey,
@@ -56,22 +63,23 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
           children: [
             TextFormField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Product Name'),
+              decoration:
+                  const InputDecoration(labelText: 'Nombre del producto'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter a product name';
+                  return 'Por favor ingrese un nombre de producto';
                 }
                 return null;
               },
             ),
             TextFormField(
               controller: _descriptionController,
-              decoration: const InputDecoration(labelText: 'Description'),
+              decoration: const InputDecoration(labelText: 'Descripción'),
               maxLines: 3,
             ),
             TextFormField(
               controller: _priceController,
-              decoration: const InputDecoration(labelText: 'Price'),
+              decoration: const InputDecoration(labelText: 'Precio'),
               keyboardType: TextInputType.number,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -85,16 +93,16 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
             ),
             TextFormField(
               controller: _lotNumberController,
-              decoration: const InputDecoration(labelText: 'Lot Number'),
+              decoration: const InputDecoration(labelText: 'Número de lote'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter a lot number';
+                  return 'Por favor ingrese un número de lote';
                 }
                 return null;
               },
             ),
             ListTile(
-              title: const Text('Expiry Date'),
+              title: const Text('Fecha de vencimiento'),
               subtitle: Text(_expiryDate.toString().split(' ')[0]),
               onTap: () async {
                 final date = await showDatePicker(
@@ -109,7 +117,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
               },
             ),
             ListTile(
-              title: const Text('Purchase Date'),
+              title: const Text('Fecha de compra'),
               subtitle: Text(_purchaseDate.toString().split(' ')[0]),
               onTap: () async {
                 final date = await showDatePicker(
@@ -125,34 +133,35 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
             ),
             TextFormField(
               controller: _invoiceNumberController,
-              decoration: const InputDecoration(labelText: 'Invoice Number'),
+              decoration: const InputDecoration(labelText: 'Número de factura'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter an invoice number';
+                  return 'Por favor ingrese un número de factura';
                 }
                 return null;
               },
             ),
             TextFormField(
               controller: _warehouseLocationController,
-              decoration: const InputDecoration(labelText: 'Warehouse Location'),
+              decoration:
+                  const InputDecoration(labelText: 'Ubicación del almacén'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter a warehouse location';
+                  return 'Por favor ingrese una ubicación de almacén';
                 }
                 return null;
               },
             ),
             TextFormField(
               controller: _quantityController,
-              decoration: const InputDecoration(labelText: 'Quantity'),
+              decoration: const InputDecoration(labelText: 'Cantidad'),
               keyboardType: TextInputType.number,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter a quantity';
+                  return 'Por favor ingrese una cantidad';
                 }
                 if (int.tryParse(value) == null) {
-                  return 'Please enter a valid number';
+                  return 'Por favor ingresa un número válido';
                 }
                 return null;
               },
@@ -160,7 +169,9 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _saveProduct,
-              child: Text(widget.product == null ? 'Add Product' : 'Update Product'),
+              child: Text(widget.product == null
+                  ? 'Agregar producto'
+                  : 'Actualizar producto'),
             ),
           ],
         ),
@@ -198,7 +209,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error saving product: $e')),
+        SnackBar(content: Text('Error al guardar el producto: $e')),
       );
     }
   }

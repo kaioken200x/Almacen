@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/models/product.dart';
-import 'package:inventory_app/services/product_search_service.dart';
-import 'package:inventory_app/widgets/product_search_item.dart';
+import 'package:globomatik_app/models/product.dart';
+import 'package:globomatik_app/services/product_search_service.dart';
+import 'package:globomatik_app/widgets/product_search_item.dart';
 
 class ProductSearchScreen extends StatefulWidget {
   const ProductSearchScreen({super.key});

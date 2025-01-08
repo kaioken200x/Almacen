@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/models/product.dart';
+import 'package:globomatik_app/models/product.dart';
 import 'package:intl/intl.dart';
 
 class ProductListItem extends StatelessWidget {
@@ -23,7 +23,8 @@ class ProductListItem extends StatelessWidget {
           children: [
             Text('Lot: ${product.lotNumber}'),
             Text('Location: ${product.warehouseLocation}'),
-            Text('Expiry: ${DateFormat('dd/MM/yyyy').format(product.expiryDate)}'),
+            Text(
+                'Expiry: ${DateFormat('dd/MM/yyyy').format(product.expiryDate)}'),
             Text('Quantity: ${product.quantity}'),
           ],
         ),

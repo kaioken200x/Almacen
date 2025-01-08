@@ -1,10 +1,10 @@
-import 'package:inventory_app/services/auth/mock_auth_provider.dart';
-import 'package:inventory_app/models/auth/auth_result.dart';
-import 'package:inventory_app/models/auth/user.dart';
+import 'package:globomatik_app/services/auth/mock_auth_provider.dart';
+import 'package:globomatik_app/models/auth/auth_result.dart';
+import 'package:globomatik_app/models/auth/user.dart';
 
 class AuthService {
   final _authProvider = MockAuthProvider();
-  
+
   Future<AuthResult> login(String email, String password) async {
     return _authProvider.login(email, password);
   }

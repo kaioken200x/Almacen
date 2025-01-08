@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/services/auth/auth_service.dart';
+import 'package:globomatik_app/services/auth/auth_service.dart';
 
 class UserProfileWidget extends StatelessWidget {
   const UserProfileWidget({super.key});

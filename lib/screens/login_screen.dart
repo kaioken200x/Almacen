@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/screens/home_screen.dart';
-import 'package:inventory_app/services/auth_service.dart';
+import 'package:globomatik_app/screens/home_screen.dart';
+import 'package:globomatik_app/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

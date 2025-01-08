@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/screens/warehouse/warehouse_zone_screen.dart';
+import 'package:globomatik_app/screens/warehouse/warehouse_zone_screen.dart';
 
 class WarehouseScreen extends StatelessWidget {
   const WarehouseScreen({super.key});
@@ -8,13 +8,13 @@ class WarehouseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Gestión de Almacén'),
+        title: const Text('Almacén'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           _WarehouseCard(
-            title: 'Zona A',
+            title: 'Calle A',
             capacity: '80%',
             items: 150,
             onTap: () => Navigator.push(
@@ -25,7 +25,7 @@ class WarehouseScreen extends StatelessWidget {
             ),
           ),
           _WarehouseCard(
-            title: 'Zona B',
+            title: 'Calle B',
             capacity: '45%',
             items: 89,
             onTap: () => Navigator.push(
@@ -36,7 +36,7 @@ class WarehouseScreen extends StatelessWidget {
             ),
           ),
           _WarehouseCard(
-            title: 'Zona C',
+            title: 'Calle C',
             capacity: '95%',
             items: 200,
             onTap: () => Navigator.push(
@@ -71,7 +71,8 @@ class _WarehouseCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       child: ListTile(
         contentPadding: const EdgeInsets.all(16),
-        title: Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        title: Text(title,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

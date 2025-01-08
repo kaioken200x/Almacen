@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/screens/reports/inventory_report_screen.dart';
-import 'package:inventory_app/screens/reports/orders_screen.dart';
-import 'package:inventory_app/screens/reports/movements_screen.dart';
-import 'package:inventory_app/screens/reports/low_stock_screen.dart';
+import 'package:globomatik_app/screens/reports/inventory_report_screen.dart';
+import 'package:globomatik_app/screens/reports/orders_screen.dart';
+import 'package:globomatik_app/screens/reports/movements_screen.dart';
+import 'package:globomatik_app/screens/reports/low_stock_screen.dart';
 
 class ReportsScreen extends StatelessWidget {
   const ReportsScreen({super.key});
@@ -86,7 +86,8 @@ class _ReportCard extends StatelessWidget {
       child: ListTile(
         contentPadding: const EdgeInsets.all(16),
         leading: Icon(icon, size: 40, color: Theme.of(context).primaryColor),
-        title: Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        title: Text(title,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         subtitle: Text(description),
         trailing: const Icon(Icons.arrow_forward_ios),
         onTap: onTap,

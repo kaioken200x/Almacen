@@ -1,4 +1,4 @@
-import 'package:inventory_app/models/auth/user.dart';
+import 'package:globomatik_app/models/auth/user.dart';
 
 class AuthResult {
   final bool success;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/screens/login_screen.dart';
+import 'package:globomatik_app/screens/login_screen.dart';
 
 void main() {
   runApp(const InventoryApp());
